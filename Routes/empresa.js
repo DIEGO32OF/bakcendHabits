@@ -7,6 +7,7 @@ var api = expres.Router();
 
 
 api.post('/saveCompany', company.saveCompany);
+api.post('/updateCompany', company.updateCompany);
 
 
 module.exports = api;

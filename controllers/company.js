@@ -17,6 +17,13 @@ company.findOne({name: paramms.name}, (err, companyFound ) => {
         newCompany.key = paramms.key
         newCompany.logo = paramms.logo
         newCompany.name = paramms.name
+        for(const area of paramms.areas){
+            newCompany.areas.push({name: area.name})
+            }
+            for(const times of paramms.timeZonesAllowed){
+                newCompany.timeZonesAllowed.push(times)
+            }
+
         newCompany.save((err,companySaved) =>{
             if(err){
                 res.status(500).send({message: 'ocurrio un error al guardar la compañia por favor intente de nuevo'})
@@ -30,21 +37,34 @@ company.findOne({name: paramms.name}, (err, companyFound ) => {
 }
 
 function updateCompany(req, res){
-    let idCompany = req.params
+    
+    
     let paramers = req.body
+    let idCompany = paramers.company
+    console.log(idCompany)
      if(paramers.updateType){
-    company.findByIdAndUpdate(idCompany,{
-        
-    }
-        
 
-        )
+             console.log(paramers.times)
+        company.findByIdAndUpdate(idCompany, 
+            
+            {$push:{timeZonesAllowed: paramers.times} } ,
+            (err, companyUpdate) => {
+                console.log(companyUpdate)
+                res.status(200).send({company: companyUpdate})
+            })
      }
      else{
+         let arrAreas = []
+         for(const area of  paramers.areas){
+            arrAreas.push({name: area.name})
+             }
+             console.log(arrAreas)
         company.findByIdAndUpdate(idCompany, 
-            {$push:{areas:{ name:localIndex[1]} } },
-            (err, comensalUpdate) => {
-
+            
+            {$push:{areas: arrAreas} } ,
+            (err, companyUpdate) => {
+                console.log(companyUpdate)
+                res.status(200).send({company: companyUpdate})
             })
      }
 }
