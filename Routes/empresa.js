@@ -8,6 +8,8 @@ var api = expres.Router();
 
 api.post('/saveCompany', company.saveCompany);
 api.post('/updateCompany', company.updateCompany);
+api.post('/getCompany', company.getCompany);
+
 
 
 module.exports = api;

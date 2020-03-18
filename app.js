@@ -6,6 +6,7 @@ var app = express();
 var empresa_route = require('./Routes/empresa');
 var encuesta_route = require('./Routes/encuesta');
 var actividad_route = require('./Routes/actividad')
+var actividadUser_route = require('./Routes/usuarioActividad')
 
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
@@ -24,6 +25,8 @@ next();
 app.use('/api', empresa_route);
 app.use('/api', encuesta_route);
 app.use('/api', actividad_route);
+app.use('/api', actividadUser_route);
+
 
 
 

@@ -8,6 +8,7 @@ let testModel = test({
     name: String,
     description: String,
     type: String,
+    userTest: { type: test.ObjectId, ref: 'activity' },
     question:[{
         points: Number,
         text: String,        
