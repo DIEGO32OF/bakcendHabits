@@ -10,8 +10,15 @@ async function getResultSurvkey(questions){
     for( const sum of connect){
         sumConnect += +sum.result
     }
+    let nivelConnect = 0
+    if(sumConnect > 0 && sumConnect <= 15)
+    nivelConnect = 1
+    if(sumConnect >= 16 && sumConnect <= 30)
+    nivelConnect = 2
+    if(sumConnect > 30 )
+    nivelConnect = 3
     porcentConect = (sumConnect * 100)/40
-    arrResulset.push({type:'connect', id: 1, porcent: porcentConect})
+    arrResulset.push({type:'connect', id: 1, porcent: porcentConect, nivel: nivelConnect})
 
     let activity = questions.filter(x => x.pillar === 2)
     let sumActivity = 0
@@ -19,8 +26,15 @@ async function getResultSurvkey(questions){
     for( const sum of activity){
         sumActivity += +sum.result
     }
+    let nivelActivate = 0
+    if(sumConnect > 0 && sumConnect <= 7)
+    nivelActivate = 1
+    if(sumConnect >= 8 && sumConnect <= 15)
+    nivelActivate = 2
+    if(sumConnect > 15 )
+    nivelActivate = 3
     proceentActivity  = (sumActivity * 100)/20
-    arrResulset.push({ type:'activate', id: 2, porcent: proceentActivity })
+    arrResulset.push({ type:'activate', id: 2, porcent: proceentActivity, nivel: nivelActivate })
     
     let relax = questions.filter(x => x.pillar === 3)
     let sumRelax = 0
@@ -28,8 +42,15 @@ async function getResultSurvkey(questions){
     for(const sum of relax){
         sumRelax += +sum.result
     }
+    let nivelRelax= 0
+    if(sumConnect > 0 && sumConnect <= 12)
+    nivelRelax = 1
+    if(sumConnect >= 13 && sumConnect <= 25)
+    nivelRelax = 2
+    if(sumConnect > 25 )
+    nivelRelax = 3
     porcentRelax = (sumRelax * 100)/30
-    arrResulset.push({ type:'relax', id: 3, porcent: porcentRelax })
+    arrResulset.push({ type:'relax', id: 3, porcent: porcentRelax, nivel: nivelRelax })
 
     let eat = questions.filter( x => x.pillar === 4)
     let sumEat = 0
@@ -37,9 +58,16 @@ async function getResultSurvkey(questions){
     for(const sum of eat){
         sumEat += + sum.result
     }
+    let nivelEat= 0
+    if(sumConnect > 0 && sumConnect <= 11)
+    nivelEat = 1
+    if(sumConnect >= 12 && sumConnect <= 30)
+    nivelEat = 2
+    if(sumConnect > 30 )
+    nivelEat = 3
     porcentEat = (sumEat * 100)/35
 
-    arrResulset.push({ type:'eat', id: 4, porcent: porcentEat})
+    arrResulset.push({ type:'eat', id: 4, porcent: porcentEat, nivel: nivelEat})
 
     return arrResulset = arrResulset.sort(function (a, b) { return a.porcent - b.porcent }) 
     

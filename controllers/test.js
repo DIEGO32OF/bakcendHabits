@@ -4,6 +4,7 @@ const test = require('../models/test');
 const activity = require('../models/activity');
 const activityUser = require('../models/activityUser');
 const task = require('../helpers/task');
+const userTest = require('./userTest')
 
 
 async function getScore(req, res){
@@ -12,6 +13,8 @@ async function getScore(req, res){
     let arrResulset = new Array()
    
     arrResulset = await task.getResultSurvkey(params.questions)
+    await userTest.updateAll(params.userId)
+    userTest.saveUserTest(arrResulset, params.userId, params.encuestaId)
 
     activity.find({level: params.level, active: true}).exec(async(err,  activityFound)  =>  {
         if(err){
@@ -24,15 +27,27 @@ async function getScore(req, res){
          let activate = activityFound.filter(x => x.pillar == 2 &&  x.level == params.level)
          let relax = activityFound.filter(x => x.pillar == 3 &&  x.level == params.level)
          let eat = activityFound.filter(x => x.pillar == 4 &&  x.level == params.level)
-         userActivities = new activityUser()
+        let userActivities = new activityUser()
          userActivities.level = params.level
          userActivities.active = true
          userActivities.idUser = params.userId
-         userActivities.idTest = encuestaId
+         userActivities.idTest = params.encuestaId
          userActivities.dateStablished = ''
          for(const activityDay of resulsetReturn[0]){
 
-            userActivities.activities.push({status: 0, points : parametros.dateVisit}) ; 
+
+            switch(activityDay.main){
+                case 1:
+                break;
+                case 2:
+                break;
+                case 3:
+                break;
+                case 4:
+                break;
+            }
+
+            userActivities.activities.push({status: 0, points : 0 }) ; 
          }
             res.status(200).send({result: arrResulset, activities: resulsetReturn[0], primer: resulsetReturn[1]})
            // res.status(200).send({ activities: arrActivities})

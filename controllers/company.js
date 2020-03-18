@@ -2,6 +2,43 @@
 var mongoose = require('mongoose');
 const company = require('../models/company');
 
+
+// falta el get company por nombre o id
+
+function getCompany(req, res){
+    let param = req.body
+    switch(param.option){
+        case 1:
+            company.findById(param.name, function (err, companyFound) {
+                if(err)
+                res.status(500).send({message: err})
+                else
+                res.status(200).send({company: companyFound})
+            })
+            break;
+
+            case 2:
+                company.findOne({name: param.name}, (err, companyFound) => {
+                    if(err)
+                    res.status(500).send({message: err})
+                    else
+                    res.status(200).send({company: companyFound})
+                })
+                break;
+
+                case 3:
+                    company.findOne({key: param.name}, (err, companyFound) => {
+                        if(err)
+                        res.status(500).send({message: err})
+                        else
+                        res.status(200).send({company: companyFound})
+                    })
+                    break;
+                
+    }
+    
+}
+
 function saveCompany(req, res){
 
 let paramms = req.body
@@ -41,15 +78,12 @@ function updateCompany(req, res){
     
     let paramers = req.body
     let idCompany = paramers.company
-    console.log(idCompany)
      if(paramers.updateType){
-
-             console.log(paramers.times)
+             
         company.findByIdAndUpdate(idCompany, 
             
             {$push:{timeZonesAllowed: paramers.times} } ,
-            (err, companyUpdate) => {
-                console.log(companyUpdate)
+            (err, companyUpdate) => {                
                 res.status(200).send({company: companyUpdate})
             })
      }
@@ -57,17 +91,15 @@ function updateCompany(req, res){
          let arrAreas = []
          for(const area of  paramers.areas){
             arrAreas.push({name: area.name})
-             }
-             console.log(arrAreas)
+             }             
         company.findByIdAndUpdate(idCompany, 
             
             {$push:{areas: arrAreas} } ,
-            (err, companyUpdate) => {
-                console.log(companyUpdate)
+            (err, companyUpdate) => {                
                 res.status(200).send({company: companyUpdate})
             })
      }
 }
 
 
-module.exports = {saveCompany, updateCompany}
+module.exports = {saveCompany, updateCompany, getCompany}
