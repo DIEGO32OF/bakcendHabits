@@ -78,27 +78,27 @@ function updateCompany(req, res){
     
     let paramers = req.body
     let idCompany = paramers.company
-     if(paramers.updateType){
+    
              
-        company.findByIdAndUpdate(idCompany, 
+
+        let updateQuery = {};
+        updateQuery = paramers
+        company.findOneAndUpdate({_id: idCompany}, {$set: updateQuery}, {new: true}, (err, respuesta) => {
+            if (err) {
+                res.status(500).send({message: err})
+            } else {
+          
+          res.status(200).send({company: respuesta})
+            }
+          })
+
+       /*  company.findByIdAndUpdate(idCompany, 
             
             {$push:{timeZonesAllowed: paramers.times} } ,
             (err, companyUpdate) => {                
                 res.status(200).send({company: companyUpdate})
-            })
-     }
-     else{
-         let arrAreas = []
-         for(const area of  paramers.areas){
-            arrAreas.push({name: area.name})
-             }             
-        company.findByIdAndUpdate(idCompany, 
-            
-            {$push:{areas: arrAreas} } ,
-            (err, companyUpdate) => {                
-                res.status(200).send({company: companyUpdate})
-            })
-     }
+            }) */
+
 }
 
 
