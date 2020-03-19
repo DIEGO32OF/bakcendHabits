@@ -9,8 +9,7 @@ let companyModel = company({
     start_date: String,
     key: String,
     logo: String,
-    name: String,
-    //areas: [{name: String }],
+    name: String,    
     timeZonesAllowed:[String],
     filtros:[
         {name:String,values:[String]}        

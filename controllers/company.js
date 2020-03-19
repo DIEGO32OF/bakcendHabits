@@ -54,9 +54,7 @@ company.findOne({name: paramms.name}, (err, companyFound ) => {
         newCompany.key = paramms.key
         newCompany.logo = paramms.logo
         newCompany.name = paramms.name
-        /* for(const area of paramms.areas){
-            newCompany.areas.push({name: area.name})
-            } */
+
             if(paramms.timeZonesAllowed){
             for(const times of paramms.timeZonesAllowed){
                 newCompany.timeZonesAllowed.push(times)
