@@ -8,6 +8,7 @@ var api = expres.Router();
 
 
 api.post('/updateActivityUser', activityUser.updateActivityUser);
+api.post('/getActivityUser', activityUser.getActivityPerDay);
 
 
 module.exports = api;

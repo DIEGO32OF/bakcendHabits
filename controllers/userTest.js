@@ -21,7 +21,7 @@ async function updateAll(idUser){
         if(!err){
             for(const foundIt of userTestFound){
              await userTest.findByIdAndUpdate(foundIt._id, {$set:{isCurrent:false}},async (error, userTestUpdate)=>{
-                console.log(userTestUpdate)
+                console.log(userTestUpdate, 'updateAll')
                 })
             }
         }

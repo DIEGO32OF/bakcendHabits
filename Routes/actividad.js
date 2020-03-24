@@ -7,6 +7,8 @@ var api = expres.Router();
 
 
 api.post('/saveActivity', activity.saveActivity);
+api.post('/loadExcel', activity.loadExcel);
+
 
 
 module.exports = api;
