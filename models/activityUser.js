@@ -17,6 +17,8 @@ let activityUserModel = activityUser({
         day: Number,
         date: String,
         isFavorite: Boolean,
+        pillar: Number,
+        daily: Number
     }]    
 });
 

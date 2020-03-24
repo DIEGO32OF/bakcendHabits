@@ -5,7 +5,7 @@ const user = require('../models/user');
 
 function saveUser(req, res){
 
-    let params = req.body
+    let params = req.body    
     let saveUser = new user()
     saveUser.wellness = params.wellness
     saveUser.tester = params.tester
@@ -42,24 +42,24 @@ function saveUser(req, res){
 
 function updateProperties(req, res)
 {
-    let params = req.body
+    let paramers = req.body
     // id, type, ativityUser o userTest ....
-    switch (params.type){
+    switch (paramers.type){
         case 1:
-           user.findByIdAndUpdate(params.id, {$push:{activityUser: paramers.activityUser} } ,
+           user.findByIdAndUpdate(paramers.id, {$push:{activityUser: paramers.activityUser} } ,
             (err, userUpdate) => {                
                 res.status(200).send({user: userUpdate})
             })
         break;
 
         case 2:
-            user.findByIdAndUpdate(params.id, {$push:{userTest: paramers.userTest} } ,
+            user.findByIdAndUpdate(paramers.id, {$push:{userTest: paramers.userTest} } ,
                 (err, userUpdate) => {                
                     res.status(200).send({user: userUpdate})
                 })
             break;
             case 3:
-                user.findByIdAndUpdate(params.id, {$push:{chat_bot_room: paramers.chat_bot_room} } ,
+                user.findByIdAndUpdate(paramers.id, {$push:{chat_bot_room: paramers.chat_bot_room} } ,
                     (err, userUpdate) => {                
                         res.status(200).send({user: userUpdate})
                     })
