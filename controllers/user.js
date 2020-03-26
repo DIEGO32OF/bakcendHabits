@@ -13,7 +13,7 @@ function saveUser(req, res){
     saveUser.seven_days = params.seven_days
     saveUser.status = params.status
     saveUser.rol = params.rol
-    saveUser.point = params.point
+    saveUser.points = params.point
     saveUser.picture = params.picture
     saveUser.old_week = params.old_week
     saveUser.name_first = params.name_first
