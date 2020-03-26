@@ -52,7 +52,7 @@ function loadExcel(req, res){
 
 
 
-function saveActivity(req, res){
+function saveActivityFor(req, res){
 
     let param = req.body
     console.log(param)
@@ -79,6 +79,30 @@ res.status(200).send({actividad: arraySaved})
 }
 
 
+function saveActivity(req, res){
+
+    let param = req.body
+
+   let mySave = new activity()
+    mySave.active = true
+    mySave.title = actividad.title
+    mySave.rules = actividad.rules
+    mySave.type = actividad.type
+    mySave.points = actividad.points
+    mySave.level = actividad.level
+    mySave.extra = actividad.extra
+    mySave.pillar = actividad.pillar
+    mySave.duration = actividad.duration
+    mySave.save((err, activeSaved) => {
+        if(!err){
+            res.status(200).send({actividad: arraySaved})
+        }
+    });
 
 
-module.exports = {saveActivity, loadExcel}
+
+}
+
+
+
+module.exports = {saveActivity, loadExcel, saveActivityFor}
