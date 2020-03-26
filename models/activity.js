@@ -12,7 +12,9 @@ let activityModel = activity({
     level: Number,
     extra: String,
     pillar: Number,
-    duration: String
+    duration: String,
+    textarea: Boolean,
+    lines:[{placeholder: String, value: String}]
 
 });
 
