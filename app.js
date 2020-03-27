@@ -8,6 +8,7 @@ var encuesta_route = require('./Routes/encuesta');
 var actividad_route = require('./Routes/actividad')
 var actividadUser_route = require('./Routes/usuarioActividad')
 var usuario_route = require('./Routes/usuario');
+var usuario_encuesta = require('./Routes/usuarioEncuesta');
 
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
@@ -28,6 +29,8 @@ app.use('/api', encuesta_route);
 app.use('/api', actividad_route);
 app.use('/api', actividadUser_route);
 app.use('/api', usuario_route);
+app.use('/api', usuario_encuesta);
+
 
 
 
