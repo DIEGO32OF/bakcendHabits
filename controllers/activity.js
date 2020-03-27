@@ -93,6 +93,8 @@ function saveActivity(req, res){
     mySave.extra = param.extra
     mySave.pillar = param.pillar
     mySave.duration = param.duration
+    mySave.textarea = param.textarea
+    mySave.lines = param.lines
     mySave.save((err, activeSaved) => {
         if(!err){
             res.status(200).send({actividad: activeSaved})
