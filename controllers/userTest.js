@@ -28,7 +28,15 @@ async function updateAll(idUser){
        })
 }
 
+function getuserTest(req, res){
+    let param = req.body
+    userTest.findOne({idUser: param.idUser, isCurrent: true}, function (err, resultFound) {
+       if(resultFound)
+       res.status(200).send({result: resultFound})
+    })
+}
 
 
 
-module.exports = {saveUserTest, updateAll}
+
+module.exports = {saveUserTest, updateAll, getuserTest}
