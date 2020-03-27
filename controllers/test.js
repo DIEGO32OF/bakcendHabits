@@ -59,7 +59,7 @@ async function getScore(req, res){
                     }
                     if(siHubo)
                     {
-                        userActivities.activities.push({status: 0, points : activeConnect.points, activity: activeConnect.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false, pillar:1, daily: counterDay }) ; 
+                        userActivities.activities.push({status: 0, points : activeConnect.points, activity: activeConnect.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false, pillar:1, daily: counterDay, duration: activeConnect.duration }) ; 
                     }
                 break;
                 case 2:
@@ -81,7 +81,7 @@ async function getScore(req, res){
                     }
                     if(siHuboAc)
                     {
-                        userActivities.activities.push({status: 0, points : actividadActive.points, activity: actividadActive.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false,  pillar:2, daily: counterDay }) ; 
+                        userActivities.activities.push({status: 0, points : actividadActive.points, activity: actividadActive.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false,  pillar:2, daily: counterDay, duration: actividadActive.duration }) ; 
                     }
                 break;
                 case 3:
@@ -103,7 +103,7 @@ async function getScore(req, res){
                     }
                     if(siHuboRe)
                     {
-                        userActivities.activities.push({status: 0, points : actividadRelax.points, activity: actividadRelax.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false, pillar:3, daily: counterDay }) ; 
+                        userActivities.activities.push({status: 0, points : actividadRelax.points, activity: actividadRelax.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false, pillar:3, daily: counterDay, duration: actividadRelax.duration }) ; 
                     }
                 break;
                 case 4:
@@ -126,7 +126,7 @@ async function getScore(req, res){
                     }
                     if(siHuboEa)
                     {
-                        userActivities.activities.push({status: 0, points : actividadEat.points, activity: actividadEat.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false, pillar:4, daily: counterDay }) ; 
+                        userActivities.activities.push({status: 0, points : actividadEat.points, activity: actividadEat.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false, pillar:4, daily: counterDay, duration: actividadEat.duration }) ; 
                     }
 
                 break;
@@ -151,7 +151,7 @@ async function getScore(req, res){
                     }
                     if(siHuboWe)
                     {
-                        userActivities.activities.push({status: 0, points : actividadWell.points, activity: actividadWell.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false, pillar:5, daily: counterDay }) ; 
+                        userActivities.activities.push({status: 0, points : actividadWell.points, activity: actividadWell.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false, pillar:5, daily: counterDay, duration: actividadWell.duration }) ; 
                     }
 
                 break;
@@ -177,7 +177,7 @@ async function getScore(req, res){
                     }
                     if(siHubo)
                     {
-                        userActivities.activities.push({status: 0, points : activeConnect.points, activity: activeConnect.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false, pillar:1, daily: counterDay }) ; 
+                        userActivities.activities.push({status: 0, points : activeConnect.points, activity: activeConnect.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false, pillar:1, daily: counterDay, duration: activeConnect.duration }) ; 
                     }
                 break;
                 case 2:
@@ -199,7 +199,7 @@ async function getScore(req, res){
                     }
                     if(siHuboAc)
                     {
-                        userActivities.activities.push({status: 0, points : actividadActive.points, activity: actividadActive.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false,  pillar:2, daily: counterDay }) ; 
+                        userActivities.activities.push({status: 0, points : actividadActive.points, activity: actividadActive.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false,  pillar:2, daily: counterDay, duration: actividadActive.duration }) ; 
                     }
                 break;
                 case 3:
@@ -221,7 +221,7 @@ async function getScore(req, res){
                     }
                     if(siHuboRe)
                     {
-                        userActivities.activities.push({status: 0, points : actividadRelax.points, activity: actividadRelax.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false, pillar:3, daily: counterDay }) ; 
+                        userActivities.activities.push({status: 0, points : actividadRelax.points, activity: actividadRelax.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false, pillar:3, daily: counterDay, duration: actividadRelax.duration }) ; 
                     }
                 break;
                 case 4:
@@ -244,7 +244,7 @@ async function getScore(req, res){
                     }
                     if(siHuboEa)
                     {
-                        userActivities.activities.push({status: 0, points : actividadEat.points, activity: actividadEat.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false, pillar:4, daily: counterDay }) ; 
+                        userActivities.activities.push({status: 0, points : actividadEat.points, activity: actividadEat.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false, pillar:4, daily: counterDay, duration: actividadEat.duration }) ; 
                     }
 
                 break;
@@ -269,7 +269,7 @@ async function getScore(req, res){
                     }
                     if(siHuboWe)
                     {
-                        userActivities.activities.push({status: 0, points : actividadWell.points, activity: actividadWell.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false, pillar:5, daily: counterDay }) ; 
+                        userActivities.activities.push({status: 0, points : actividadWell.points, activity: actividadWell.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false, pillar:5, daily: counterDay, duration: actividadWell.duration }) ; 
                     }
 
                 break;
@@ -295,7 +295,7 @@ async function getScore(req, res){
                     }
                     if(siHubo)
                     {
-                        userActivities.activities.push({status: 0, points : activeConnect.points, activity: activeConnect.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false, pillar:1, daily: counterDay }) ; 
+                        userActivities.activities.push({status: 0, points : activeConnect.points, activity: activeConnect.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false, pillar:1, daily: counterDay, duration: activeConnect.duration }) ; 
                     }
                 break;
                 case 2:
@@ -317,7 +317,7 @@ async function getScore(req, res){
                     }
                     if(siHuboAc)
                     {
-                        userActivities.activities.push({status: 0, points : actividadActive.points, activity: actividadActive.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false,  pillar:2, daily: counterDay }) ; 
+                        userActivities.activities.push({status: 0, points : actividadActive.points, activity: actividadActive.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false,  pillar:2, daily: counterDay, duration: actividadActive.duration }) ; 
                     }
                 break;
                 case 3:
@@ -339,7 +339,7 @@ async function getScore(req, res){
                     }
                     if(siHuboRe)
                     {
-                        userActivities.activities.push({status: 0, points : actividadRelax.points, activity: actividadRelax.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false, pillar:3, daily: counterDay }) ; 
+                        userActivities.activities.push({status: 0, points : actividadRelax.points, activity: actividadRelax.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false, pillar:3, daily: counterDay, duration: actividadRelax.duration }) ; 
                     }
                 break;
                 case 4:
@@ -362,7 +362,7 @@ async function getScore(req, res){
                     }
                     if(siHuboEa)
                     {
-                        userActivities.activities.push({status: 0, points : actividadEat.points, activity: actividadEat.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false, pillar:4, daily: counterDay }) ; 
+                        userActivities.activities.push({status: 0, points : actividadEat.points, activity: actividadEat.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false, pillar:4, daily: counterDay, duration: actividadEat.duration }) ; 
                     }
 
                 break;
@@ -387,7 +387,7 @@ async function getScore(req, res){
                     }
                     if(siHuboWe)
                     {
-                        userActivities.activities.push({status: 0, points : actividadWell.points, activity: actividadWell.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false, pillar:5, daily: counterDay }) ; 
+                        userActivities.activities.push({status: 0, points : actividadWell.points, activity: actividadWell.id, userAnswer: '', day: activityDay.day, date: '', isFavorite: false, pillar:5, daily: counterDay, duration: actividadWell.duration }) ; 
                     }
 
                 break;

@@ -53,24 +53,25 @@ async function getActivityPerDay(req, res){
     
 }
 
-async function getActividades(actividades){
-   // return new Promise((resolve, rejected) => {
+function getResumeActivites(req, res){
+    
+    let param = req.body    
     let arr = []
 
-    //for(const act of actividades){
-                
-        activity.findById(act.activity, function (err, activitiFounder){
-            
-            arr.push(activitiFounder)
-            
-        })
-     // }
-     // setTimeout(() => {
-     //     console.log('aguanta')
-        return arr
-      //}, 2500);
-     
-    //})
+     activityUser.findOne({idUser: param.idUser}, async function (err, activityFound) {       
+           if(activityFound)      {
+               let actividades = activityFound.activities.filter(x=> x.status === 2)
+               arr = getActividades(actividades)
+               res.status(200).send({ actividades: arr})
+           }
+     })    
+}
+
+async function getActividades(actividades){
+    return new Promise((resolve, rejected) => {
+        let arr = []
+        
+    })
 }
 
 function algo(){}
