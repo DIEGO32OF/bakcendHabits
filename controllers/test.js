@@ -23,11 +23,11 @@ async function getScore(req, res){
         else if(activityFound){
          let resulsetReturn = await task.getActivities(arrResulset)
          let arrDayAct = []
-         let connect = activityFound.filter(x => x.pillar == 1 &&  x.level == params.level)
-         let activate = activityFound.filter(x => x.pillar == 2 &&  x.level == params.level)
-         let relax = activityFound.filter(x => x.pillar == 3 &&  x.level == params.level)
-         let eat = activityFound.filter(x => x.pillar == 4 &&  x.level == params.level)
-         let wellnes = activityFound.filter(x => x.pillar == 5 &&  x.level == params.level)
+         let connect = activityFound.filter(x => x.pillar == 1 &&  x.level == params.level && x.active)
+         let activate = activityFound.filter(x => x.pillar == 2 &&  x.level == params.level && x.active)
+         let relax = activityFound.filter(x => x.pillar == 3 &&  x.level == params.level && x.active)
+         let eat = activityFound.filter(x => x.pillar == 4 &&  x.level == params.level && x.active)
+         let wellnes = activityFound.filter(x => x.pillar == 5 &&  x.level == params.level && x.active)
         let userActivities = new activityUser()
          userActivities.level = params.level
          userActivities.active = true

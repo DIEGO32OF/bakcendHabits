@@ -22,6 +22,21 @@ function updateActivityUser(req, res){
     })
     
 }
+function getActivitiesHistory(req, res){
+    let param = req.body
+     activityUser.findOne({idUser: param.idUser}, async function (err, activityFound) { 
+         if(err)      {
+            res.status(500).send({message: err})
+         }
+           if(activityFound)      {
+               
+            let actividades = activityFound.activities.filter(x=> x.status != 0)
+            res.status(200).send({actividades: actividades})
+           }
+     })
+}
+
+
 async function getActivityPerDay(req, res){
     let param = req.body
    //let busqueda = 
@@ -76,5 +91,6 @@ async function getActividades(actividades){
 
 function algo(){}
 
-module.exports = {updateActivityUser, getActivityPerDay}
+
+    module.exports = {updateActivityUser, getActivityPerDay, getActivitiesHistory}
 
