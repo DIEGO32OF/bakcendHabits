@@ -19,7 +19,7 @@ function loadExcel(req, res){
             mySave.points = row[4]
             mySave.level = row[5]
             mySave.extra = row[6]
-            let pilar = 0
+            /* let pilar = 0
             switch (row[7]){
                 case 'C':
                     pilar = 1
@@ -37,9 +37,17 @@ function loadExcel(req, res){
                         pilar = 5
                         break;
 
-            }
-            mySave.pillar = pilar
+            } */
+            mySave.pillar = row[7]
             mySave.duration = row[8]
+            mySave.textarea = row[8]
+            mySave.text = row[9]
+            let arrayOption = []
+            if(row[9] != '.'){
+                arrayOption.push(row[10], row[11], row[12])
+                mySave.opciones = arrayOption
+                mySave.correct_answer = row[12]
+            }
              mySave.save((err, activeSaved) => {
                 if(!err){
                     arraySaved.push(activeSaved)   

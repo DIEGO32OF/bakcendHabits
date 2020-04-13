@@ -10,6 +10,8 @@ var api = expres.Router();
 api.post('/updateActivityUser', activityUser.updateActivityUser);
 api.post('/getActivityUser', activityUser.getActivityPerDay);
 api.post('/getActivitiesHistory', activityUser.getActivitiesHistory);
+api.post('/getActivitiesToReview', activityUser.getActivitiesToReview);
+
 
 
 

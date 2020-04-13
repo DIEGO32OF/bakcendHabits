@@ -14,7 +14,10 @@ let activityModel = activity({
     pillar: Number,
     duration: String,
     textarea: Boolean,
-    lines:[{placeholder: String, value: String, uid: String}]
+    lines:[{placeholder: String, value: String, uid: String}],
+    opciones: [String],
+    text: String,
+    correct_answer : String
 
 });
 
