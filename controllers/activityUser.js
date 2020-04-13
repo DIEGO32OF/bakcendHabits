@@ -97,7 +97,7 @@ async function getActivityPerDay(req, res){
                 
                 activity.findById(act.activity, function (err, activitiFounder){
                     activitiFounder._id = act._id                    
-                    arr.push(activitiFounder)
+                    arr.push({activitiFounder, status: act.status})
                     
                 })
              }
