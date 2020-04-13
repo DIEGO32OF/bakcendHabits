@@ -12,6 +12,7 @@ function updateActivityUser(req, res){
     activityUser.findOneAndUpdate({"idUser": params.idUser, "activities._id" : params.activity }, {$set:{
         "activities.$.status": params.status,
         "activities.$.userAnswer": params.userAnswer,
+        "activities.$.date": params.date,
         "activities.$.isFavorite": params.isFavorite}},{ 
         new: true
       }, function (err, active){
@@ -22,6 +23,31 @@ function updateActivityUser(req, res){
     })
     
 }
+
+function getActivitiesToReview(req, res){
+    let param = req.body
+    activityUser.find({'activities.status': 1}, async function (err, activityFound) { 
+        if(err)      {
+           res.status(500).send({message: err})
+        }
+          if(activityFound)      { 
+            
+              let arrayResult = []
+              console.log(activityFound, '----------------------')
+              for(const active of activityFound){
+                
+            let actividades = active.activities.filter(x=> x.status == 1 )
+            arrayResult.push({actividades, id: active.id, level: active.level, idUser: active.idUser})
+             // console.log( arrayResult)
+              }
+
+              setTimeout(() => {              
+                res.status(200).send({ actividadesReview: arrayResult})
+              }, 1000);
+          }
+    })
+}
+
 function getActivitiesHistory(req, res){
     let param = req.body
      activityUser.findOne({idUser: param.idUser}, async function (err, activityFound) { 
@@ -31,7 +57,27 @@ function getActivitiesHistory(req, res){
            if(activityFound)      {
                
             let actividades = activityFound.activities.filter(x=> x.status != 0)
-            res.status(200).send({actividades: actividades})
+            let arr = []
+            let counter = 0
+            let total = actividades.length
+            let max = param.page *20
+            let min = max - 20
+            for(const act of actividades){
+                
+                if(counter >= min && counter <= max){
+                activity.findById(act.activity, function (err, activitiFounder){
+                    
+                   let resume = { act, actividad:activitiFounder }                
+                    arr.push(resume)
+                    
+                })
+            }
+                counter ++
+             }
+              setTimeout(() => {              
+              res.status(200).send({ actividades: arr, total: total})
+            }, 1000);
+           // res.status(200).send({actividades: actividades})
            }
      })
 }
@@ -50,13 +96,12 @@ async function getActivityPerDay(req, res){
               for(const act of actividades){
                 
                 activity.findById(act.activity, function (err, activitiFounder){
-                    
+                    activitiFounder._id = act._id                    
                     arr.push(activitiFounder)
                     
                 })
              }
-              setTimeout(() => {
-              console.log(arr)
+              setTimeout(() => {              
               res.status(200).send({ actividades: arr})
             }, 1000);
               
@@ -92,5 +137,5 @@ async function getActividades(actividades){
 function algo(){}
 
 
-    module.exports = {updateActivityUser, getActivityPerDay, getActivitiesHistory}
+    module.exports = {updateActivityUser, getActivityPerDay, getActivitiesHistory, getActivitiesToReview}
 
