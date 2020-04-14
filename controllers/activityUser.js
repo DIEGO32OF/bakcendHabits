@@ -32,14 +32,19 @@ function getActivitiesToReview(req, res){
         }
           if(activityFound)      { 
             
-              let arrayResult = []
-              console.log(activityFound, '----------------------')
+              let arrayResult = []              
               for(const active of activityFound){
                 
             let actividades = active.activities.filter(x=> x.status == 1 )
-            arrayResult.push({actividades, id: active.id, level: active.level, idUser: active.idUser})
+            for(const act of actividades){
+                                
+                activity.findById(act.activity, function (err, activitiFounder){
+            arrayResult.push({act, actividad: activitiFounder, id: active.id, level: active.level, idUser: active.idUser})
              // console.log( arrayResult)
-              }
+              })
+            }
+
+        }
 
               setTimeout(() => {              
                 res.status(200).send({ actividadesReview: arrayResult})
