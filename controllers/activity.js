@@ -40,13 +40,13 @@ function loadExcel(req, res){
             } */
             mySave.pillar = row[7]
             mySave.duration = row[8]
-            mySave.textarea = row[8]
-            mySave.text = row[9]
+            mySave.textarea = row[9]
+            mySave.text = row[10]
             let arrayOption = []
-            if(row[9] != '.'){
-                arrayOption.push(row[10], row[11], row[12])
+            if(row[10] != '.'){
+                arrayOption.push(row[11], row[12], row[13])
                 mySave.opciones = arrayOption
-                mySave.correct_answer = row[12]
+                mySave.correct_answer = row[13]
             }
              mySave.save((err, activeSaved) => {
                 if(!err){
