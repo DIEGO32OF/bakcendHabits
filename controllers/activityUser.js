@@ -62,9 +62,14 @@ function getActivitiesHistory(req, res){
            if(activityFound)      {
                
             let actividades = activityFound.activities.filter(x=> x.status != 0)
+            let favorite = activityFound.activities.filter(x=> x.isFavorite)
             let arr = []
             let counter = 0
+            let arrFavorite = []
+            let counterF = 0
             let total = actividades.length
+            let totalFavorites = favorite.length
+            
             let max = param.page *20
             let min = max - 20
             for(const act of actividades){
@@ -79,14 +84,41 @@ function getActivitiesHistory(req, res){
             }
                 counter ++
              }
+
+             for(const fav of favorite){
+                
+                if(counterF >= min && counterF <= max){
+                activity.findById(fav.activity, function (err, activitiFounder){
+                    
+                   let resume = { fav, actividad:activitiFounder }                
+                   arrFavorite.push(resume)
+                    
+                })
+            }
+                counterF ++
+             }
+
               setTimeout(() => {              
-              res.status(200).send({ actividades: arr, total: total})
+              res.status(200).send({ actividades: arr, total: total, totalF: totalFavorites, favorito: arrFavorite })
             }, 1000);
            // res.status(200).send({actividades: actividades})
            }
      })
 }
 
+function getLogros(req, res)
+{
+    let param = req.body
+    activityUser.findOne({idUser: param.idUser}, async function (err, activityFound) {       
+        if(activityFound)      {
+            let actividades = activityFound.activities.filter(x=> x.daily === (param.day + 1) && x.status == 2)
+            let point = actividades.map(x=> x.points).reduce((a, b) => a + b, 0)
+            let duration = actividades.map(x=> x.duration).map(numStr => parseInt(numStr)).reduce((a, b) => a + b, 0)
+            //console.log(point, duration, actividades)
+            res.status(200).send({puntos: point, duracion: duration, actividades: actividades})
+        }
+    })
+}
 
 async function getActivityPerDay(req, res){
     let param = req.body
@@ -142,5 +174,6 @@ async function getActividades(actividades){
 function algo(){}
 
 
-    module.exports = {updateActivityUser, getActivityPerDay, getActivitiesHistory, getActivitiesToReview}
+    module.exports = {updateActivityUser, getActivityPerDay, getActivitiesHistory, getActivitiesToReview,
+        getLogros}
 
