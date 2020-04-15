@@ -5,15 +5,20 @@ const activity = require('../models/activity');
 
 function updateActivityUser(req, res){
     let params = req.body
-    console.log(params)
+    
     if(!params.isFavorite)
     params.isFavorite = false
-
-    activityUser.findOneAndUpdate({"idUser": params.idUser, "activities._id" : params.activity }, {$set:{
-        "activities.$.status": params.status,
-        "activities.$.userAnswer": params.userAnswer,
-        "activities.$.date": params.date,
-        "activities.$.isFavorite": params.isFavorite}},{ 
+  
+    let arrKeys = '{'+ Object.keys(params).map(x => 
+        '"activities.$.'+x+ '": ' +   '"'+params[x]+'"' )
+    .filter(f => f.includes('status') || f.includes('userAnswer') || f.includes('isFavorite')|| f.includes('date') )
+    .reduce((a, b) => a +", "+ b, "").replace(',', '')+' }'
+    
+let query = JSON.parse(arrKeys)
+    
+    
+    activityUser.findOneAndUpdate({"idUser": params.idUser, "activities._id" : params.activity }, {$set:
+        query },{ 
         new: true
       }, function (err, active){
         if(err)
