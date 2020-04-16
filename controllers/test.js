@@ -48,11 +48,11 @@ async function getScore(req, res){
                     siHubo = true
                     }
                     else{
-                      for(let intent = 0; intent < 4; intent ++)  {
+                      for(let intent = 0; intent < 6; intent ++)  {
                         activeConnect = connect[Math.floor(Math.random() * connect.length)]
                         if(!arrayIds.includes(activeConnect.id)){
                           arrayIds.push(activeConnect.id)
-                          intent = 4
+                          intent = 6
                           siHubo = true
                         }
                       }
@@ -70,11 +70,11 @@ async function getScore(req, res){
                     siHuboAc = true
                     }
                     else{
-                      for(let intent = 0; intent < 4; intent ++)  {
+                      for(let intent = 0; intent < 6; intent ++)  {
                         actividadActive = activate[Math.floor(Math.random() * activate.length)]
                         if(!arrayIds.includes(actividadActive.id)){
                           arrayIds.push(actividadActive.id)
-                          intent = 4
+                          intent = 6
                           siHuboAc = true
                         }
                       }
@@ -92,11 +92,11 @@ async function getScore(req, res){
                     siHuboRe = true
                     }
                     else{
-                      for(let intent = 0; intent < 4; intent ++)  {
+                      for(let intent = 0; intent < 6; intent ++)  {
                         actividadRelax = relax[Math.floor(Math.random() * relax.length)]
                         if(!arrayIds.includes(actividadRelax.id)){
                           arrayIds.push(actividadRelax.id)
-                          intent = 4
+                          intent = 6
                           siHuboRe = true
                         }
                       }
@@ -115,11 +115,11 @@ async function getScore(req, res){
                     siHuboEa = true
                     }
                     else{
-                      for(let intent = 0; intent < 4; intent ++)  {
+                      for(let intent = 0; intent < 6; intent ++)  {
                         actividadEat = eat[Math.floor(Math.random() * eat.length)]
                         if(!arrayIds.includes(actividadEat.id)){
                           arrayIds.push(actividadEat.id)
-                          intent = 4
+                          intent = 6
                           siHuboEa = true
                         }
                       }
@@ -140,11 +140,11 @@ async function getScore(req, res){
                     siHuboWe = true
                     }
                     else{
-                      for(let intent = 0; intent < 4; intent ++)  {
+                      for(let intent = 0; intent < 6; intent ++)  {
                         actividadWell = wellnes[Math.floor(Math.random() * wellnes.length)]
                         if(!arrayIds.includes(actividadWell.id)){
                           arrayIds.push(actividadWell.id)
-                          intent = 4
+                          intent = 6
                           siHuboWe = true
                         }
                       }
@@ -166,11 +166,11 @@ async function getScore(req, res){
                     siHubo = true
                     }
                     else{
-                      for(let intent = 0; intent < 4; intent ++)  {
+                      for(let intent = 0; intent < 6; intent ++)  {
                         activeConnect = connect[Math.floor(Math.random() * connect.length)]
                         if(!arrayIds.includes(activeConnect.id)){
                           arrayIds.push(activeConnect.id)
-                          intent = 4
+                          intent = 6
                           siHubo = true
                         }
                       }
@@ -188,11 +188,11 @@ async function getScore(req, res){
                     siHuboAc = true
                     }
                     else{
-                      for(let intent = 0; intent < 4; intent ++)  {
+                      for(let intent = 0; intent < 6; intent ++)  {
                         actividadActive = activate[Math.floor(Math.random() * activate.length)]
                         if(!arrayIds.includes(actividadActive.id)){
                           arrayIds.push(actividadActive.id)
-                          intent = 4
+                          intent = 6
                           siHuboAc = true
                         }
                       }
@@ -210,11 +210,11 @@ async function getScore(req, res){
                     siHuboRe = true
                     }
                     else{
-                      for(let intent = 0; intent < 4; intent ++)  {
+                      for(let intent = 0; intent < 6; intent ++)  {
                         actividadRelax = relax[Math.floor(Math.random() * relax.length)]
                         if(!arrayIds.includes(actividadRelax.id)){
                           arrayIds.push(actividadRelax.id)
-                          intent = 4
+                          intent = 6
                           siHuboRe = true
                         }
                       }
@@ -233,11 +233,11 @@ async function getScore(req, res){
                     siHuboEa = true
                     }
                     else{
-                      for(let intent = 0; intent < 4; intent ++)  {
+                      for(let intent = 0; intent < 6; intent ++)  {
                         actividadEat = eat[Math.floor(Math.random() * eat.length)]
                         if(!arrayIds.includes(actividadEat.id)){
                           arrayIds.push(actividadEat.id)
-                          intent = 4
+                          intent = 6
                           siHuboEa = true
                         }
                       }
@@ -258,11 +258,11 @@ async function getScore(req, res){
                     siHuboWe = true
                     }
                     else{
-                      for(let intent = 0; intent < 4; intent ++)  {
+                      for(let intent = 0; intent < 6; intent ++)  {
                         actividadWell = wellnes[Math.floor(Math.random() * wellnes.length)]
                         if(!arrayIds.includes(actividadWell.id)){
                           arrayIds.push(actividadWell.id)
-                          intent = 4
+                          intent = 6
                           siHuboWe = true
                         }
                       }
@@ -284,11 +284,11 @@ async function getScore(req, res){
                     siHubo = true
                     }
                     else{
-                      for(let intent = 0; intent < 4; intent ++)  {
+                      for(let intent = 0; intent < 6; intent ++)  {
                         activeConnect = connect[Math.floor(Math.random() * connect.length)]
                         if(!arrayIds.includes(activeConnect.id)){
                           arrayIds.push(activeConnect.id)
-                          intent = 4
+                          intent = 6
                           siHubo = true
                         }
                       }
@@ -306,11 +306,11 @@ async function getScore(req, res){
                     siHuboAc = true
                     }
                     else{
-                      for(let intent = 0; intent < 4; intent ++)  {
+                      for(let intent = 0; intent < 6; intent ++)  {
                         actividadActive = activate[Math.floor(Math.random() * activate.length)]
                         if(!arrayIds.includes(actividadActive.id)){
                           arrayIds.push(actividadActive.id)
-                          intent = 4
+                          intent = 6
                           siHuboAc = true
                         }
                       }
@@ -328,11 +328,11 @@ async function getScore(req, res){
                     siHuboRe = true
                     }
                     else{
-                      for(let intent = 0; intent < 4; intent ++)  {
+                      for(let intent = 0; intent < 6; intent ++)  {
                         actividadRelax = relax[Math.floor(Math.random() * relax.length)]
                         if(!arrayIds.includes(actividadRelax.id)){
                           arrayIds.push(actividadRelax.id)
-                          intent = 4
+                          intent = 6
                           siHuboRe = true
                         }
                       }
@@ -351,11 +351,11 @@ async function getScore(req, res){
                     siHuboEa = true
                     }
                     else{
-                      for(let intent = 0; intent < 4; intent ++)  {
+                      for(let intent = 0; intent < 6; intent ++)  {
                         actividadEat = eat[Math.floor(Math.random() * eat.length)]
                         if(!arrayIds.includes(actividadEat.id)){
                           arrayIds.push(actividadEat.id)
-                          intent = 4
+                          intent = 6
                           siHuboEa = true
                         }
                       }
@@ -376,11 +376,11 @@ async function getScore(req, res){
                     siHuboWe = true
                     }
                     else{
-                      for(let intent = 0; intent < 4; intent ++)  {
+                      for(let intent = 0; intent < 6; intent ++)  {
                         actividadWell = wellnes[Math.floor(Math.random() * wellnes.length)]
                         if(!arrayIds.includes(actividadWell.id)){
                           arrayIds.push(actividadWell.id)
-                          intent = 4
+                          intent = 6
                           siHuboWe = true
                         }
                       }

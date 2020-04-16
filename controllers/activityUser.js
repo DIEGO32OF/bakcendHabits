@@ -2,6 +2,7 @@
 var mongoose = require('mongoose');
 const activityUser = require('../models/activityUser');
 const activity = require('../models/activity');
+const axios = require('axios');
 
 function updateActivityUser(req, res){
     let params = req.body
@@ -23,11 +24,48 @@ let query = JSON.parse(arrKeys)
       }, function (err, active){
         if(err)
         res.status(500).send({message: err})
-        else
-        res.status(200).send({Activivdad: active})
+        else{
+
+            if(params.uid){
+                let actividad = active.activities.filter(x => x._id == params.activity)
+                            
+            activity.findById(actividad[0].activity, function (err, activitiFounder){                  
+            const config = {
+                headers: { Authorization: 'Bearer 400853ac-af63-4436-bdf8-9eea7494659d' }
+            };
+            
+            const bodyParameters = {
+                "user_activity":{
+                    "title":activitiFounder.title,
+                    "rules": activitiFounder.rules,
+                    "status": params.status,
+                    "points": activitiFounder.points,
+                    "type": activitiFounder.type,
+                    "uid":params.uid
+                }
+            
+            };
+            
+            axios.post( 
+              'https://us-central1-habits-ai.cloudfunctions.net/app/addPointUserActivitysFromRemote',
+              bodyParameters,
+              config
+            ).then(resultset => {
+                res.status(200).send({Activivdad: active, code: resultset.data.code, message: resultset.data.message }) 
+            }).catch(console.log);
+        })
+
+        }
+        else   
+            res.status(200).send({Activivdad: active})
+        }
+        
     })
     
 }
+
+
+
 
 function getActivitiesToReview(req, res){
     let param = req.body
