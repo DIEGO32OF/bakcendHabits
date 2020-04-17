@@ -51,13 +51,13 @@ let query = JSON.parse(arrKeys)
               bodyParameters,
               config
             ).then(resultset => {
-                res.status(200).send({Activivdad: active, code: resultset.data.code, message: resultset.data.message }) 
+                res.status(200).send({ code: resultset.data.code, message: resultset.data.message }) 
             }).catch(console.log);
         })
 
         }
         else   
-            res.status(200).send({Activivdad: active})
+            res.status(200).send({message: 'Actualizado ok'})
         }
         
     })
@@ -83,13 +83,17 @@ function getActivitiesToReview(req, res){
                                 
                 activity.findById(act.activity, function (err, activitiFounder){
             arrayResult.push({act, actividad: activitiFounder, id: active.id, level: active.level, idUser: active.idUser})
-             // console.log( arrayResult)
+              
+            
               })
             }
 
         }
 
-              setTimeout(() => {              
+              setTimeout(() => {        
+               /*  console.log( arrayResult.act.date)
+                        */
+                       arrayResult = arrayResult.sort(function (a, b) { return a.act.daily - b.act.daily });
                 res.status(200).send({ actividadesReview: arrayResult})
               }, 1000);
           }
@@ -103,9 +107,10 @@ function getActivitiesHistory(req, res){
             res.status(500).send({message: err})
          }
            if(activityFound)      {
-               
+              
             let actividades = activityFound.activities.filter(x=> x.status != 0)
             let favorite = activityFound.activities.filter(x=> x.isFavorite)
+            
             let arr = []
             let counter = 0
             let arrFavorite = []
@@ -141,9 +146,11 @@ function getActivitiesHistory(req, res){
                 counterF ++
              }
 
-              setTimeout(() => {              
+              setTimeout(() => {   
+                arrFavorite=arrFavorite.sort(function (a, b) { return b.fav.daily - a.fav.daily }); 
+                arr = arr.sort(function (a, b) { return b.act.daily - a.act.daily });             
               res.status(200).send({ actividades: arr, total: total, totalF: totalFavorites, favorito: arrFavorite })
-            }, 1000);
+            }, 1800);
            // res.status(200).send({actividades: actividades})
            }
      })
