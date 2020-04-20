@@ -405,8 +405,8 @@ async function getScore(req, res){
                 res.status(500).send({message: err})
              }
              else
-            res.status(200).send({result: arrResulset, activities: resulsetReturn[0], primer: resulsetReturn[1], ActividadesResult: userActivitiesSaved })
-           // res.status(200).send({ activities: arrActivities})
+           // res.status(200).send({result: arrResulset, activities: resulsetReturn[0], primer: resulsetReturn[1], ActividadesResult: userActivitiesSaved })
+            res.status(200).send({ result: arrResulset})
         })
         }
         
