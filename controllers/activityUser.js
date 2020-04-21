@@ -147,8 +147,8 @@ function getActivitiesHistory(req, res){
              }
 
               setTimeout(() => {   
-                arrFavorite=arrFavorite.sort(function (a, b) { return b.fav.daily - a.fav.daily }); 
-                arr = arr.sort(function (a, b) { return b.act.daily - a.act.daily });             
+                arrFavorite=arrFavorite.sort(function (a, b) { return b.fav.date.replace(/-/g,'').replace(/:/g,'').replace('T','') - a.fav.date.replace(/-/g,'').replace(/:/g,'').replace('T','') }); 
+                arr = arr.sort(function (a, b) { return b.act.date.replace(/-/g,'').replace(/:/g,'').replace('T','') - a.act.date.replace(/-/g,'').replace(/:/g,'').replace('T','') });             
               res.status(200).send({ actividades: arr, total: total, totalF: totalFavorites, favorito: arrFavorite })
             }, 1800);
            // res.status(200).send({actividades: actividades})
