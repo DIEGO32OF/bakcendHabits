@@ -9,15 +9,20 @@ function updateActivityUser(req, res){
     
     if(!params.isFavorite)
     params.isFavorite = false
-  
+    
+    if(params.userAnswer != undefined){
+     let userAnswerRe  = params.userAnswer
+    
+    params.userAnswer = userAnswerRe.replace(/"/g, "'")   
+    } 
+
     let arrKeys = '{'+ Object.keys(params).map(x => 
         '"activities.$.'+x+ '": ' +   '"'+params[x]+'"' )
     .filter(f => f.includes('status') || f.includes('userAnswer') || f.includes('isFavorite')|| f.includes('date') )
     .reduce((a, b) => a +", "+ b, "").replace(',', '')+' }'
     
 let query = JSON.parse(arrKeys)
-    
-    
+        
     activityUser.findOneAndUpdate({"idUser": params.idUser, "activities._id" : params.activity }, {$set:
         query },{ 
         new: true
