@@ -39,6 +39,55 @@ function saveUser(req, res){
     })
 }
 
+function getPointsRacha(req, res){
+    let params = req.body
+    user.findById(params.id, function (err, userFounder){
+        if(userFounder){
+            let racha = 1
+            let points = 1
+            let array = [29, 57, 85,113]
+            if(!array.includes(params.daily)){
+            if((parseInt(params.daily) - parseInt(userFounder.daily) ) === 1){
+                
+                racha = userFounder.racha + 1                
+                if(racha > 3){
+                points = parseInt(racha/ 3)
+                
+                if((racha % 3) > 0)
+                points = points + 1
+                }
+                                   
+                user.findByIdAndUpdate(params.id, {racha: racha, daily: params.daily}, (err, userUpdate)=>{
+                    if(userUpdate){
+                        res.status(200).send({puntos: points})
+                    }
+                })
+            }
+            else{
+                if((parseInt(params.daily) - parseInt(userFounder.daily) ) > 1){
+                user.findByIdAndUpdate(params.id, {racha: 1, daily: params.daily}, (err, userUpdate)=>{
+                    if(userUpdate){
+                res.status(200).send({puntos: 1})
+                    }
+                    else
+                    res.status(404).send({puntos: 0})
+                    })
+                }
+                else
+                res.status(200).send({puntos: 0})
+            }
+        }
+        else{
+            user.findByIdAndUpdate(params.id, {racha: 1, daily: params.daily}, (err, userUpdate)=>{
+                if(userUpdate){
+            res.status(200).send({puntos: 1})
+                }
+            })
+        }
+        }
+    })
+}
+
 
 function updateProperties(req, res)
 {
@@ -69,4 +118,4 @@ function updateProperties(req, res)
 
 
 
-module.exports = {saveUser, updateProperties}
+module.exports = {saveUser, updateProperties, getPointsRacha}
