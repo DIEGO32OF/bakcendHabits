@@ -56,7 +56,10 @@ let query = JSON.parse(arrKeys)
               bodyParameters,
               config
             ).then(resultset => {
+                if(resultset.data.code)
                 res.status(200).send({ code: resultset.data.code, message: resultset.data.message }) 
+                else
+                res.status(200).send(resultset.data) 
             }).catch(console.log);
         })
 
