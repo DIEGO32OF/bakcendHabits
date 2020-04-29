@@ -88,6 +88,23 @@ function getPointsRacha(req, res){
     })
 }
 
+function updateUser(req, res){
+      
+    let paramers = req.body
+    let idUser = paramers.idUser
+                    
+        let updateQuery = {};
+        updateQuery = paramers
+        user.findOneAndUpdate({_id: idUser}, {$set: updateQuery}, {new: true}, (err, respuesta) => {
+            if (err) {
+                res.status(500).send({message: err})
+            } else {
+          
+          res.status(200).send({user: respuesta})
+            }
+          })
+}
+
 
 function updateProperties(req, res)
 {
@@ -113,9 +130,15 @@ function updateProperties(req, res)
                         res.status(200).send({user: userUpdate})
                     })
                 break;
+                case 4:
+                    user.findByIdAndUpdate(paramers.id, {$push:{chat_bot_room: paramers.chat_bot_room} } ,
+                        (err, userUpdate) => {                
+                            res.status(200).send({user: userUpdate})
+                        })
+                    break;
     }
 }
 
 
 
-module.exports = {saveUser, updateProperties, getPointsRacha}
+module.exports = {saveUser, updateProperties, getPointsRacha, updateUser}

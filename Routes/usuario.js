@@ -10,6 +10,8 @@ var api = expres.Router();
 api.post('/saveUser', user.saveUser);
 api.post('/updateProperties', user.updateProperties);
 api.post('/getPointsRacha', user.getPointsRacha);
+api.post('/updateUser', user.updateUser);
+
 
 
 

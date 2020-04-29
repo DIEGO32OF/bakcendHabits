@@ -12,6 +12,8 @@ api.post('/getActivityUser', activityUser.getActivityPerDay);
 api.post('/getActivitiesHistory', activityUser.getActivitiesHistory);
 api.post('/getActivitiesToReview', activityUser.getActivitiesToReview);
 api.post('/getLogros', activityUser.getLogros);
+api.post('/getActivitiesReport', activityUser.getActivitiesReport);
+
 
 
 

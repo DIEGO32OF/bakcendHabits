@@ -3,6 +3,8 @@ var mongoose = require('mongoose');
 const activityUser = require('../models/activityUser');
 const activity = require('../models/activity');
 const axios = require('axios');
+const user = require('../models/user');
+var ObjectId = require('mongoose').Types.ObjectId; 
 
 function updateActivityUser(req, res){
     let params = req.body
@@ -71,6 +73,168 @@ let query = JSON.parse(arrKeys)
     })
     
 }
+
+
+function getActivitiesReport(req, res){
+    let params = req.body
+    let myCompany = ''
+   /*  if(!params.company.includes('ObjectId'))
+     myCompany = 'ObjectId("'+params.company+'")'
+     else */
+     myCompany = params.company 
+     if(params.area != '*'){   
+    user.find({company: myCompany, area: params.area}, function(err, userFound){
+      if(err){
+        console.log(err)
+      }
+      if(userFound){          
+        let myUsers = userFound.map( x => x._id)
+        //console.log(myUsers)
+        activityUser.find({ idUser: { $in: myUsers } }, function (err, activityFound) {         
+          if(err)      {
+            res.status(500).send({message: err})
+          }
+          if(activityFound)      {
+              
+              let arrayResult = []
+            let totalActs = activityFound.map(x=> x.activities)
+          //  for(let i =0; i<totalActs.length; i++){
+            let aprobadas = 0
+            let noAprobadas = 0
+            let totales = 0
+            totalActs.map(a => {
+                let actDate = a.filter(y => y.status != 0).filter(x=> x.date.replace(/-/g, '') >= params.fechaIni && x.date.replace(/-/g, '') <= params.fechaFin)
+                let actividadesMas = actDate.map(m=> m.activity)
+                if(actDate.length > 0)
+                arrayResult.push(actividadesMas)                
+
+                totales += actDate.length
+                 aprobadas += actDate.filter(t => t.status == 2).length
+                 noAprobadas += actDate.filter(a => a.status == 3).length 
+                 
+               
+            })
+            let concat = ''
+            for(const id of arrayResult){
+                concat += id+','
+            }
+        
+        let spliter = concat.split(',').filter(x => x != '') 
+        let spliUnique = spliter.filter(function(v, i, self) 
+        {             
+           return i == self.indexOf(v); 
+        })
+        activity.find({_id: {$in:spliUnique}}, function (err, activitiFounder){   
+
+           let arrayFinal = []
+           spliUnique.map( m => {
+               
+               let num = spliter.filter( f=> f == m).length
+               let type = activitiFounder.filter(t => t._id == m).map(({type, title}) =>({type, title}))
+               console.log(m,num,type)
+               arrayFinal.push({numero: num, actividad: type, })
+               arrayFinal = arrayFinal.sort(function (a, b) { return b.numero - a.numero });
+           })
+           let final = []
+           arrayFinal.map( f => {
+               console.log(f)
+               let res = final.filter( v=> v.actividad[0].type == f.actividad[0].type).length
+               if(res === 0){
+                   final.push(f)
+               }
+           })
+
+       res.status(200).send({total: totales, aprobadas: aprobadas,
+         NoAprobadas: noAprobadas, actividades: final})
+
+          //  }
+       })
+      
+          }
+    })
+}
+else
+console.log('no trae')
+})
+     }
+     // si area
+     else{
+        user.find({company: myCompany}, function(err, userFound){
+            if(err){
+              console.log(err)
+            }
+            if(userFound){          
+              let myUsers = userFound.map( x => x._id)
+              console.log(myUsers)
+              activityUser.find({ idUser: { $in: myUsers } }, function (err, activityFound) {         
+                if(err)      {
+                  res.status(500).send({message: err})
+                }
+                if(activityFound)      {
+              
+                    let arrayResult = []
+                    let totalActs = activityFound.map(x=> x.activities)
+                  //  for(let i =0; i<totalActs.length; i++){
+                    let aprobadas = 0
+                    let noAprobadas = 0
+                    let totales = 0
+                    totalActs.map(a => {
+                        let actDate = a.filter(y => y.status != 0).filter(x=> x.date.replace(/-/g, '') >= params.fechaIni && x.date.replace(/-/g, '') <= params.fechaFin)
+                        let actividadesMas = actDate.map(m=> m.activity)
+                        if(actDate.length > 0)
+                        arrayResult.push(actividadesMas)                
+        
+                        totales += actDate.length
+                         aprobadas += actDate.filter(t => t.status == 2).length
+                         noAprobadas += actDate.filter(a => a.status == 3).length 
+                         
+                       
+                    })
+                    let concat = ''
+                    for(const id of arrayResult){
+                        concat += id+','
+                    }
+                
+                let spliter = concat.split(',').filter(x => x != '') 
+                let spliUnique = spliter.filter(function(v, i, self) 
+                {             
+                   return i == self.indexOf(v); 
+                })
+                activity.find({_id: {$in:spliUnique}}, function (err, activitiFounder){   
+        
+                   let arrayFinal = []
+                   spliUnique.map( m => {
+                       
+                       let num = spliter.filter( f=> f == m).length
+                       let type = activitiFounder.filter(t => t._id == m).map(({type, title}) =>({type, title}))
+                       console.log(m,num,type)
+                       arrayFinal.push({numero: num, actividad: type, })
+                       arrayFinal = arrayFinal.sort(function (a, b) { return b.numero - a.numero });
+                   })
+                   let final = []
+                   arrayFinal.map( f => {
+                       console.log(f)
+                       let res = final.filter( v=> v.actividad[0].type == f.actividad[0].type).length
+                       if(res === 0){
+                           final.push(f)
+                       }
+                   })
+        
+               res.status(200).send({total: totales, aprobadas: aprobadas,
+                 NoAprobadas: noAprobadas, actividades: final})
+        
+                  //  }
+               })
+                }
+          })
+      }
+      else
+      console.log('no trae')
+      })
+     }
+
+}
+
 
 
 
@@ -182,6 +346,11 @@ async function getActivityPerDay(req, res){
     let param = req.body
    //let busqueda = 
    let arr = []
+   let array = [29, 57, 85,113]
+   let cambio = false
+   if(array.includes((param.day+1))){
+    cambio = true
+   }
    //activityUser.findOne({idUser: param.idUser, activities: { $elemMatch: { daily: (param.day + 1) } }}).exec((err, activityFound) =>{
        //.exec((err, activityFound) =>{
    //busqueda.populate('activities.activity').exec((err, activityFound) =>{
@@ -200,7 +369,7 @@ async function getActivityPerDay(req, res){
                 })
              }
               setTimeout(() => {              
-              res.status(200).send({ actividades: arr})
+              res.status(200).send({ actividades: arr, cambioPilar: cambio})
             }, 1000);
               
           }
@@ -236,5 +405,5 @@ function algo(){}
 
 
     module.exports = {updateActivityUser, getActivityPerDay, getActivitiesHistory, getActivitiesToReview,
-        getLogros}
+        getLogros, getActivitiesReport}
 
