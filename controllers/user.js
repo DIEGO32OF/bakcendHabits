@@ -28,6 +28,7 @@ function saveUser(req, res){
     saveUser.cell_phone = params.cell_phone
     saveUser.born_date = params.born_date
     saveUser.company = params.company
+    saveUser.filtros = params.filtros
     saveUser.save((err, userSaved)=>{
         if(err)
         {
@@ -131,7 +132,7 @@ function updateProperties(req, res)
                     })
                 break;
                 case 4:
-                    user.findByIdAndUpdate(paramers.id, {$push:{chat_bot_room: paramers.chat_bot_room} } ,
+                    user.findByIdAndUpdate(paramers.id, {$push:{filtros: paramers.filtros} } ,
                         (err, userUpdate) => {                
                             res.status(200).send({user: userUpdate})
                         })

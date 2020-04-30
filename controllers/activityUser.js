@@ -82,12 +82,13 @@ function getActivitiesReport(req, res){
      myCompany = 'ObjectId("'+params.company+'")'
      else */
      myCompany = params.company 
-     if(params.area != '*'){   
-    user.find({company: myCompany, area: params.area}, function(err, userFound){
+     if(params.area != ''){   
+    user.find({company: myCompany, filtros: { $elemMatch: { value: params.area}}}, function(err, userFound){
       if(err){
         console.log(err)
       }
-      if(userFound){          
+      if(userFound){    
+          console.log(userFound,'llllllllll')      
         let myUsers = userFound.map( x => x._id)
         //console.log(myUsers)
         activityUser.find({ idUser: { $in: myUsers } }, function (err, activityFound) {         
