@@ -26,7 +26,9 @@ cell_phone: String,
 born_date: String,
 racha: Number,
 daily: Number,
-area: String,
+filtros:[
+    {name:String,value:String}        
+],
 chat_bot_room: [{name: String, id: String}],
 activityUser: [{ type: user.ObjectId, ref: 'activityUser' }],
 company: { type: user.ObjectId, ref: 'company' },

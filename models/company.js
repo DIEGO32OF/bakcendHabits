@@ -12,7 +12,7 @@ let companyModel = company({
     name: String,    
     timeZonesAllowed:[String],
     filtros:[
-        {name:String,values:[String]}        
+        {name:String,values:String}        
     ]
 
 });
