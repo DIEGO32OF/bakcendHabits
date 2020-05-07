@@ -17,7 +17,7 @@ convSave.notification = param.notification
 convSave.pillar = convSave.pillar
 convSave.next_advanced = param.next_advanced
 convSave.next_intermediate = param.next_intermediate
-convSave.next_basic = convSave.next_basic
+convSave.next_basic = param.next_basic
 convSave.save((err, conversationSaved) =>{
     if(err)
     res.status(500).send({message: err})
