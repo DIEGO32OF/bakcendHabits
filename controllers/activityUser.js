@@ -87,8 +87,7 @@ function getActivitiesReport(req, res){
       if(err){
         console.log(err)
       }
-      if(userFound){    
-          console.log(userFound,'llllllllll')      
+      if(userFound){                 
         let myUsers = userFound.map( x => x._id)
         //console.log(myUsers)
         activityUser.find({ idUser: { $in: myUsers } }, function (err, activityFound) {         

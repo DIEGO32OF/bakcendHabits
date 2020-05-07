@@ -26,6 +26,8 @@ cell_phone: String,
 born_date: String,
 racha: Number,
 daily: Number,
+conversation: String,
+conversationStatus: String,
 filtros:[
     {name:String,value:String}        
 ],
