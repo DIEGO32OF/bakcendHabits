@@ -1,7 +1,30 @@
 'use strict'
 var mongoose = require('mongoose');
 const user = require('../models/user');
+const conversation = require('../models/conversation');
 
+
+function saveConversation(req, res){
+let param = req.body
+let convSave = new conversation()
+convSave.advanced = param.advanced
+convSave.basic = param.basic
+convSave.intermediate = param.intermediate
+convSave.change_habit = param.change_habit
+convSave.n_conversation = param.n_conversation
+convSave.points = param.points
+convSave.notification = param.notification
+convSave.pillar = convSave.pillar
+convSave.next_advanced = param.next_advanced
+convSave.next_intermediate = param.next_intermediate
+convSave.next_basic = convSave.next_basic
+convSave.save((err, conversationSaved) =>{
+    if(err)
+    res.status(500).send({message: err})
+    else if(conversationSaved)
+    res.status(200).send({convesation: conversationSaved})
+})
+}
 
 function saveUser(req, res){
 
@@ -42,6 +65,7 @@ function saveUser(req, res){
 
 function getPointsRacha(req, res){
     let params = req.body
+    
     user.findById(params.id, function (err, userFounder){
         if(userFounder){
             let racha = 1
@@ -74,8 +98,12 @@ function getPointsRacha(req, res){
                     res.status(404).send({puntos: 0})
                     })
                 }
-                else
-                res.status(200).send({puntos: 0})
+                else{
+                 //   user.update( {}, {conversation: '', conversationStatus: ''}, { multi: true }, (err, userupdated) =>{
+               //         console.log(userupdated)
+                res.status(200).send({puntos: 0})            
+            //} )
+                }
             }
         }
         else{
@@ -142,4 +170,4 @@ function updateProperties(req, res)
 
 
 
-module.exports = {saveUser, updateProperties, getPointsRacha, updateUser}
+module.exports = {saveUser, updateProperties, getPointsRacha, updateUser, saveConversation}
