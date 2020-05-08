@@ -26,6 +26,59 @@ convSave.save((err, conversationSaved) =>{
 })
 }
 
+function getConversationByUser(req, res){
+let params = req.body
+let arrayUsers = params.map(u => u.idMgDB)
+
+let arrResult = []
+let result = []
+user.find({_id: {$in:arrayUsers}}, function (err, userFounded){
+    if(err)
+    res.status(404).send({message: err})
+    else{
+        
+    userFounded.map(m => {
+        
+        let uidFilter = params.filter(p => p.idMgDB == m._id).map(m => m.uid)
+        console.log(m._id, uidFilter)
+        if(m.conversation != ''){
+     
+    conversation.findOne({$or:[{basic: m.conversation},{intermediate: m.conversation}, {advanced: m.conversation }]}, function(myerr, conversations){
+
+        let myConversation = conversations._doc
+        let level = Object.keys(myConversation).find(key => myConversation[key] === m.conversation)        
+        let mensaje = myConversation.notification[level]
+        let nextConversation = ''
+        switch(level){
+            case  'basic' :
+                nextConversation = myConversation.next_basic
+                break
+                case  'intermediate' :
+                    nextConversation = myConversation.next_intermediate
+                break
+                case  'advanced' :
+                    nextConversation = myConversation.next_advanced
+                    break
+                
+        }
+        
+        arrResult.push({currentConv: m.conversation, nextConv: nextConversation, estatusConv: m.conversationStatus,  idMgDB:m._id, uid: uidFilter[0], nivel: level,
+             mensajes: mensaje, change_habit: myConversation.change_habit, n_conversation: myConversation.n_conversation })
+        //console.log(arrResult, 46)
+    })
+
+}
+  
+})
+
+setTimeout(() => {        
+    res.status(200).send({conversations: arrResult})
+   }, 1000);
+    
+    }
+})
+}
+
 function saveUser(req, res){
 
     let params = req.body    
@@ -170,4 +223,4 @@ function updateProperties(req, res)
 
 
 
-module.exports = {saveUser, updateProperties, getPointsRacha, updateUser, saveConversation}
+module.exports = {saveUser, updateProperties, getPointsRacha, updateUser, saveConversation, getConversationByUser }

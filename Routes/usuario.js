@@ -12,6 +12,8 @@ api.post('/updateProperties', user.updateProperties);
 api.post('/getPointsRacha', user.getPointsRacha);
 api.post('/updateUser', user.updateUser);
 api.post('/saveConversation', user.saveConversation);
+api.post('/getConversationByUser', user.getConversationByUser);
+
 
 
 

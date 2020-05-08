@@ -54,6 +54,10 @@ company.findOne({name: paramms.name}, (err, companyFound ) => {
         newCompany.key = paramms.key
         newCompany.logo = paramms.logo
         newCompany.name = paramms.name
+        for(const fil of paramms.filtros){
+        newCompany.filtros.push({name:fil.name, value: fil.value})
+        }
+        
 
             if(paramms.timeZonesAllowed){
             for(const times of paramms.timeZonesAllowed){
