@@ -54,9 +54,16 @@ company.findOne({name: paramms.name}, (err, companyFound ) => {
         newCompany.key = paramms.key
         newCompany.logo = paramms.logo
         newCompany.name = paramms.name
-        for(const fil of paramms.filtros){
-        newCompany.filtros.push({name:fil.name, value: fil.value})
+ /*        for(const fil of paramms.filtros){
+            console.log(fil.value)
+            for(const val of fil.value){
+                newCompany.filtros.value.push(val)
+            }
+        newCompany.filtros.push({name:fil.name})
         }
+        */
+        newCompany.filtros = paramms.filtros
+        
         
 
             if(paramms.timeZonesAllowed){
@@ -65,14 +72,14 @@ company.findOne({name: paramms.name}, (err, companyFound ) => {
             }
         }
 
-        newCompany.save((err,companySaved) =>{
+         newCompany.save((err,companySaved) =>{
             if(err){
                 res.status(500).send({message: 'ocurrio un error al guardar la compañia por favor intente de nuevo'})
             }
             else{
                 res.status(200).send({company: companySaved})
             }            
-        })
+        }) 
     }
 })
 }
