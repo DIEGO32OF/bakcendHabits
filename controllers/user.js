@@ -26,9 +26,14 @@ convSave.save((err, conversationSaved) =>{
 })
 }
 
+
+
+
 function getConversationByUser(req, res){
 let params = req.body
-let arrayUsers = params.map(u => u.idMgDB)
+
+let arrayUsers = params.users.map(u => u.idMgDB)
+console.log(arrayUsers)
 
 let arrResult = []
 let result = []
@@ -39,12 +44,15 @@ user.find({_id: {$in:arrayUsers}}, function (err, userFounded){
         
     userFounded.map(m => {
         
-        let uidFilter = params.filter(p => p.idMgDB == m._id).map(m => m.uid)
+        let uidFilter = params.users.filter(p => p.idMgDB == m._id).map(m => m.uid)
         console.log(m._id, uidFilter)
         if(m.conversation != ''){
      
     conversation.findOne({$or:[{basic: m.conversation},{intermediate: m.conversation}, {advanced: m.conversation }]}, function(myerr, conversations){
-
+if(err)
+res.status(500).send({message:err})
+else{
+    if(conversations){
         let myConversation = conversations._doc
         let level = Object.keys(myConversation).find(key => myConversation[key] === m.conversation)        
         let mensaje = myConversation.notification[level]
@@ -65,6 +73,8 @@ user.find({_id: {$in:arrayUsers}}, function (err, userFounded){
         arrResult.push({currentConv: m.conversation, nextConv: nextConversation, estatusConv: m.conversationStatus,  idMgDB:m._id, uid: uidFilter[0], nivel: level,
              mensajes: mensaje, change_habit: myConversation.change_habit, n_conversation: myConversation.n_conversation })
         //console.log(arrResult, 46)
+    }
+}
     })
 
 }
