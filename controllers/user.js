@@ -26,7 +26,18 @@ convSave.save((err, conversationSaved) =>{
 })
 }
 
+function getUser(req, res){
+let param = req.body
+user.findById(param.idUser, function (err, userFound){ 
+    if(err)
+    res.status(500).send({message: err})
+    else if(userFound){
+        res.status(200).send({user: userFound})
+    }
 
+})
+
+}
 
 
 function getConversationByUser(req, res){
@@ -162,10 +173,10 @@ function getPointsRacha(req, res){
                     })
                 }
                 else{
-                 //   user.update( {}, {conversation: '', conversationStatus: ''}, { multi: true }, (err, userupdated) =>{
-               //         console.log(userupdated)
+                    user.update( {conversation: undefined}, {conversation: '', conversationStatus: ''}, { multi: true }, (err, userupdated) =>{
+                        console.log( err, userupdated)
                 res.status(200).send({puntos: 0})            
-            //} )
+            } )
                 }
             }
         }
@@ -233,4 +244,4 @@ function updateProperties(req, res)
 
 
 
-module.exports = {saveUser, updateProperties, getPointsRacha, updateUser, saveConversation, getConversationByUser }
+module.exports = {getUser, saveUser, updateProperties, getPointsRacha, updateUser, saveConversation, getConversationByUser }
