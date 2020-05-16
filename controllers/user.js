@@ -173,10 +173,9 @@ function getPointsRacha(req, res){
                     })
                 }
                 else{
-                    user.update( {conversation: undefined}, {conversation: '', conversationStatus: ''}, { multi: true }, (err, userupdated) =>{
-                        console.log( err, userupdated)
+
                 res.status(200).send({puntos: 0})            
-            } )
+           // } )
                 }
             }
         }
