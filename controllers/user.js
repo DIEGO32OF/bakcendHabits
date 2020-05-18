@@ -123,6 +123,8 @@ function saveUser(req, res){
     saveUser.diet = params.diet
     saveUser.racha = params.racha
     saveUser.daily = params.daily
+    saveUser.conversation = params.conversation
+    saveUser.conversationStatus = params.conversationStatus
     saveUser.create_date = params.create_date
     saveUser.cell_phone = params.cell_phone
     saveUser.born_date = params.born_date
