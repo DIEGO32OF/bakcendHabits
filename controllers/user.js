@@ -110,7 +110,7 @@ function saveUser(req, res){
     saveUser.seven_days = params.seven_days
     saveUser.status = params.status
     saveUser.rol = params.rol
-    saveUser.points = params.point
+    saveUser.points = params.points
     saveUser.picture = params.picture
     saveUser.old_week = params.old_week
     saveUser.name_first = params.name_first
@@ -121,6 +121,8 @@ function saveUser(req, res){
     saveUser.lenguage = params.lenguage
     saveUser.gender = params.gender
     saveUser.diet = params.diet
+    saveUser.racha = params.racha
+    saveUser.daily = params.daily
     saveUser.create_date = params.create_date
     saveUser.cell_phone = params.cell_phone
     saveUser.born_date = params.born_date
