@@ -81,7 +81,7 @@ else{
                 
         }
         
-        arrResult.push({currentConv: m.conversation, nextConv: nextConversation, estatusConv: m.conversationStatus,  idMgDB:m._id, uid: uidFilter[0], nivel: level,
+        arrResult.push({currentConv: m.conversation, status: m.conversationStatus, nextConv: nextConversation, estatusConv: m.conversationStatus,  idMgDB:m._id, uid: uidFilter[0], nivel: level,
              mensajes: mensaje, change_habit: myConversation.change_habit, n_conversation: myConversation.n_conversation })
         //console.log(arrResult, 46)
     }
