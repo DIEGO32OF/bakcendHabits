@@ -27,7 +27,7 @@ born_date: String,
 racha: Number,
 daily: Number,
 conversation: String,
-conversationStatus: String,
+conversationStatus: Number,
 filtros:[
     {name:String,value:String}        
 ],
