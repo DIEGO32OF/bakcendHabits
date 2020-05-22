@@ -86,6 +86,39 @@ res.status(200).send({actividad: arraySaved})
 
 }
 
+function getActivity(req, res){
+
+}
+
+function getActivities(req, res){
+    let param = req.body    
+    let arr = []
+
+    activity.find({}, async function (err, activityFound) {       
+           if(activityFound)      {
+               res.status(200).send({ actividades: activityFound})
+           }
+     })
+}
+
+
+function updateActivity(req, res){
+
+    let paramers = req.body
+    let idActivity = paramers.idActivity
+                    
+        let updateQuery = {};
+        updateQuery = paramers
+        activity.findOneAndUpdate({_id: idActivity}, {$set: updateQuery}, {new: true}, (err, respuesta) => {
+        if (err) {
+            res.status(500).send({message: err})
+        } else {
+      
+      res.status(200).send({actividad: respuesta})
+        }
+      })
+}
+
 
 function saveActivity(req, res){
 
@@ -115,4 +148,4 @@ function saveActivity(req, res){
 
 
 
-module.exports = {saveActivity, loadExcel, saveActivityFor}
+module.exports = {saveActivity, loadExcel, saveActivityFor, updateActivity, getActivities}

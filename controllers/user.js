@@ -4,6 +4,15 @@ const user = require('../models/user');
 const conversation = require('../models/conversation');
 
 
+function generico(req, res){
+   let params = req.body 
+   for(const racha of params){
+    user.findOneAndUpdate({_id: racha.idMgDB}, {racha: racha.racha_actual}, (err, respuesta) => {
+        
+      })
+   }
+}
+
 function saveConversation(req, res){
 let param = req.body
 let convSave = new conversation()
@@ -143,7 +152,7 @@ function saveUser(req, res){
 
 function getPointsRacha(req, res){
     let params = req.body
-    
+    console.log(params)
     user.findById(params.id, function (err, userFounder){
         if(userFounder){
             let racha = 1
@@ -177,10 +186,10 @@ function getPointsRacha(req, res){
                     })
                 }
                 else{
-                   // user.update( {conversationStatus: null}, { conversationStatus: 0}, { multi: true }, (err, userupdated) =>{
+                  //  user.update( {}, { daily: 0, racha:0}, { multi: true }, (err, userupdated) =>{
                    // console.log( err, userupdated)
                 res.status(200).send({puntos: 0})            
-          //  } )
+           // } )
                 }
             }
         }
@@ -248,4 +257,4 @@ function updateProperties(req, res)
 
 
 
-module.exports = {getUser, saveUser, updateProperties, getPointsRacha, updateUser, saveConversation, getConversationByUser }
+module.exports = {generico, getUser, saveUser, updateProperties, getPointsRacha, updateUser, saveConversation, getConversationByUser }
