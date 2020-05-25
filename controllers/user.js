@@ -2,6 +2,7 @@
 var mongoose = require('mongoose');
 const user = require('../models/user');
 const conversation = require('../models/conversation');
+const axios = require('axios');
 
 
 function generico(req, res){
@@ -169,16 +170,28 @@ function getPointsRacha(req, res){
                 points = points + 1
                 }
                                    
-                user.findByIdAndUpdate(params.id, {racha: racha, daily: params.daily}, (err, userUpdate)=>{
+                user.findByIdAndUpdate(params.id, {racha: racha, daily: params.daily}, async (err, userUpdate)=>{
                     if(userUpdate){
+                        // await
+                        if(params.rachaUser){
+                            params.rachaUser.pointsSum = points
+                            console.log(params,'.......................................')
+                        await sendRachaUser(params.rachaUser, params.timezoneUser, params.daily, params.id, params.uidUser, points )
+                    }
                         res.status(200).send({puntos: points})
                     }
                 })
             }
             else{
                 if((parseInt(params.daily) - parseInt(userFounder.daily) ) > 1){
-                user.findByIdAndUpdate(params.id, {racha: 1, daily: params.daily}, (err, userUpdate)=>{
+                user.findByIdAndUpdate(params.id, {racha: 1, daily: params.daily}, async (err, userUpdate)=>{
                     if(userUpdate){
+                        
+                        if(params.rachaUser){
+                            params.rachaUser.pointsSum = 1
+                            console.log(params,'.......................................')
+                        await sendRachaUser(params.rachaUser, params.timezoneUser, params.daily, params.id, params.uidUser, 1 )
+                        }
                 res.status(200).send({puntos: 1})
                     }
                     else
@@ -220,6 +233,38 @@ function updateUser(req, res){
             }
           })
 }
+
+
+async function sendRachaUser(rachaUser, timeZone, daily, id, uidUser, puntos){
+    const config = {
+        headers: { Authorization: 'Bearer 400853ac-af63-4436-bdf8-9eea7494659d' }
+    };
+    
+    const bodyParameters = {
+        //"user_Racha":{
+            "rachaUser":rachaUser,
+            "timezoneUser": timeZone,
+            "uidUser": uidUser,
+            "id": id,
+            "daily": daily
+           // "":puntos
+     //   }
+    
+    };
+    
+    axios.post( 
+      'https://us-central1-habits-ai.cloudfunctions.net/app/updateRachaUser',
+      bodyParameters,
+      config
+    ).then(resultset => {
+        console.log(resultset.data)
+        if(resultset.data.code)
+        return resultset.data.code 
+        else
+        resultset.data
+    }).catch(console.log);
+}
+
 
 
 function updateProperties(req, res)
